@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Form</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background: antiquewhite;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Form Example</h1>
+
+    <form autocapitalize="on" method="GET">
+      <!-- First Name -->
+
+      <label for="fname">First Name</label>
+      <input type="text" id="fname" name="fname" />
+
+      <!-- Password -->
+
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" />
+
+      <!-- Week Selector -->
+
+      <label>Week</label>
+      <input type="week" name="week" id="week" />
+
+      <!-- Datalist + Input -->
+
+      <label for="city">City</label>
+      <input
+        type="text"
+        name="city"
+        id="city"
+        list="city-list"
+        placeholder="Select City"
+      />
+
+      <datalist id="city-list">
+        <option value="Patna"></option>
+        <option value="Ranchi"></option>
+        <option value="Delhi"></option>
+        <option value="Bangalore"></option>
+      </datalist>
+
+      <!-- Editor Multi-select -->
+
+      <label for="editor">Editors</label>
+      <select name="editor" id="editor" multiple>
+        <option value="vscode">VS Code</option>
+        <option value="sublime">Sublime Text</option>
+        <option value="vim">Vim</option>
+        <option value="emacs">Emacs</option>
+      </select>
+
+      <!-- Buttons -->
+
+      <label></label>
+      <input type="reset" value="Reset Form" />
+
+      <label></label>
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>
