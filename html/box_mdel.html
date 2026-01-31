@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- Makes layout responsive on different screen sizes -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Box Model Demo</title>
+
+    <style>
+      /* -------------------------------
+         NORMAL BOX
+         -------------------------------
+         box-sizing is NOT defined here,
+         so browser uses default:
+         box-sizing: content-box
+      */
+      .normal-box {
+        background: aquamarine;
+
+        /* width & height apply ONLY to content */
+        width: 100px;
+        height: 30px;
+
+        /* padding is added OUTSIDE content size */
+        padding: 10px;
+
+        /* border is added OUTSIDE content + padding */
+        border: 5px solid black;
+
+        /* margin creates space OUTSIDE the box */
+        margin: 10px;
+      }
+
+      /* -------------------------------
+         BORDER BOX
+         -------------------------------
+         box-sizing: border-box
+         width & height include:
+         content + padding + border
+      */
+      .border-box {
+        box-sizing: border-box;
+        background: darkorange;
+
+        /* FINAL width = 100px (fixed) */
+        width: 100px;
+        height: 30px;
+
+        /* padding stays INSIDE 100px */
+        padding: 10px;
+
+        /* border stays INSIDE 100px */
+        border: 5px solid black;
+
+        /* margin is always outside */
+        margin: 10px;
+      }
+
+      /* -------------------------------
+         CONTENT BOX (EXPLICIT)
+         -------------------------------
+         Same behavior as default,
+         but written explicitly for clarity
+      */
+      .content-box {
+        box-sizing: content-box;
+        background: yellowgreen;
+
+        /* width & height apply ONLY to content */
+        width: 100px;
+        height: 30px;
+
+        /* padding increases total size */
+        padding: 10px;
+
+        /* border increases total size */
+        border: 5px solid black;
+
+        /* margin does NOT affect size calculation */
+        margin: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <!-- Default behavior (content-box) -->
+      <div class="normal-box">Normal box</div>
+
+      <!-- Predictable size, modern usage -->
+      <div class="border-box">Border Box</div>
+
+      <!-- Explicit content-box behavior -->
+      <div class="content-box">Content box</div>
+    </div>
+  </body>
+</html>
