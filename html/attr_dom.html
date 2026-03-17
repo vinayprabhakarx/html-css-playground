@@ -3,14 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Attributes and DOM</title>
 </head>
 <body>
     <div>
         <a href="https://blog.vinayprabhakar.dev" id="my-link"> Go to my blog site</a>
+        <br>
+        <img src="/media/logo.svg" alt="myLogo" id="my-logo" width="30px">
     </div>
     
     <script>
+        // link manipulation using dom
         const link = document.getElementById('my-link');
         link.setAttribute('href', 'https://vinayprabhakar.dev');
         link.innerText = 'Go to my site';
@@ -18,6 +21,11 @@
         const url = link.getAttribute('href');
         alert("Display URL: " + url);
         link.removeAttribute('href');
+
+        // logo manipulation using dom
+        const logo = document.getElementById('my-logo');
+        logo.setAttribute('src', '/media/new-logo.svg');
+        logo.setAttribute('alt', 'New Logo');
 
     </script>
 </body>
