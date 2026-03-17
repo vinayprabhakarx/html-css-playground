@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <a href="https://blog.vinayprabhakar.dev" id="my-link"> Go to my blog site</a>
+    </div>
+    
+    <script>
+        const link = document.getElementById('my-link');
+        link.setAttribute('href', 'https://vinayprabhakar.dev');
+        link.innerText = 'Go to my site';
+
+        const url = link.getAttribute('href');
+        alert("Display URL: " + url);
+        link.removeAttribute('href');
+
+    </script>
+</body>
+</html>
