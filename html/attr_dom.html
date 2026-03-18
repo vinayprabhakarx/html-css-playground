@@ -3,30 +3,321 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Attributes and DOM</title>
+    <title>Attributes and DOM Manipulation</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            line-height: 1.6;
+        }
+        .section {
+            border: 1px solid #ddd;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .highlight {
+            background-color: yellow;
+            padding: 5px;
+        }
+        .active {
+            color: white;
+            background-color: #007bff;
+            padding: 10px;
+            border-radius: 3px;
+        }
+        .error {
+            color: red;
+            border: 1px solid red;
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 3px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
 <body>
-    <div>
+    <h1>DOM Manipulation Examples</h1>
+
+    <!-- Section 1: Basic Attribute Manipulation -->
+    <div class="section">
+        <h2>1. Basic Attribute Manipulation</h2>
         <a href="https://blog.vinayprabhakar.dev" id="my-link"> Go to my blog site</a>
-        <br>
+        <br><br>
         <img src="/media/logo.svg" alt="myLogo" id="my-logo" width="30px">
+        <p>Link href: <span id="link-url"></span></p>
     </div>
-    
+
+    <!-- Section 2: Class Manipulation -->
+    <div class="section">
+        <h2>2. Class Manipulation</h2>
+        <div id="class-div">Hover over me or click buttons</div>
+        <br>
+        <button id="add-class-btn">Add Class</button>
+        <button id="remove-class-btn">Remove Class</button>
+        <button id="toggle-class-btn">Toggle Class</button>
+    </div>
+
+    <!-- Section 3: Style Manipulation -->
+    <div class="section">
+        <h2>3. Inline Style Manipulation</h2>
+        <div id="style-div">Change my color and size</div>
+        <br>
+        <button id="change-style-btn">Change Style</button>
+        <button id="reset-style-btn">Reset Style</button>
+    </div>
+
+    <!-- Section 4: Content Manipulation -->
+    <div class="section">
+        <h2>4. Content Manipulation</h2>
+        <div id="content-div">Original Text</div>
+        <div id="html-div">Original <strong>HTML</strong> Content</div>
+        <br>
+        <button id="change-text-btn">Change Text</button>
+        <button id="change-html-btn">Change HTML</button>
+    </div>
+
+    <!-- Section 5: Data Attributes -->
+    <div class="section">
+        <h2>5. Data Attributes</h2>
+        <div id="data-div" data-user="john" data-age="25" data-role="admin">
+            Click to see data attributes
+        </div>
+        <p id="data-display"></p>
+        <br>
+        <button id="show-data-btn">Show Data</button>
+        <button id="update-data-btn">Update Data</button>
+    </div>
+
+    <!-- Section 6: Element Creation and Manipulation -->
+    <div class="section">
+        <h2>6. Element Creation</h2>
+        <div id="list-container">
+            <ul id="item-list">
+                <li>Item 1</li>
+            </ul>
+        </div>
+        <br>
+        <button id="add-item-btn">Add Item</button>
+        <button id="add-paragraph-btn">Add Paragraph</button>
+    </div>
+
+    <!-- Section 7: Attribute Existence Check -->
+    <div class="section">
+        <h2>7. Check & Manage Attributes</h2>
+        <input type="text" id="my-input" placeholder="Type something" disabled>
+        <br><br>
+        <button id="check-attr-btn">Check Disabled</button>
+        <button id="toggle-disabled-btn">Toggle Disabled</button>
+        <button id="remove-attr-btn">Remove Disabled</button>
+    </div>
+
+    <!-- Section 8: Multiple Attributes at Once -->
+    <div class="section">
+        <h2>8. hasAttribute & Multiple Attributes</h2>
+        <div id="multi-attr" class="test" title="Hover me" data-info="multiple attributes">
+            Element with multiple attributes
+        </div>
+        <p id="attr-list"></p>
+        <button id="check-title-btn">Check for Title</button>
+    </div>
+
     <script>
-        // link manipulation using dom
+        // ===== SECTION 1: Basic Attribute Manipulation =====
+        console.log("=== Basic Attribute Manipulation ===");
+        
         const link = document.getElementById('my-link');
         link.setAttribute('href', 'https://vinayprabhakar.dev');
         link.innerText = 'Go to my site';
 
         const url = link.getAttribute('href');
-        alert("Display URL: " + url);
-        link.removeAttribute('href');
+        document.getElementById('link-url').textContent = url;
 
-        // logo manipulation using dom
         const logo = document.getElementById('my-logo');
         logo.setAttribute('src', '/media/new-logo.svg');
         logo.setAttribute('alt', 'New Logo');
 
+        // ===== SECTION 2: Class Manipulation =====
+        console.log("=== Class Manipulation ===");
+        
+        const classDiv = document.getElementById('class-div');
+        
+        document.getElementById('add-class-btn').addEventListener('click', function() {
+            classDiv.classList.add('highlight');
+            console.log('Class added:', classDiv.classList);
+        });
+
+        document.getElementById('remove-class-btn').addEventListener('click', function() {
+            classDiv.classList.remove('highlight');
+            console.log('Class removed:', classDiv.classList);
+        });
+
+        document.getElementById('toggle-class-btn').addEventListener('click', function() {
+            classDiv.classList.toggle('active');
+            console.log('Class toggled:', classDiv.classList);
+        });
+
+        // Check if element has a class
+        console.log('Has highlight class:', classDiv.classList.contains('highlight'));
+
+        // ===== SECTION 3: Style Manipulation =====
+        console.log("=== Style Manipulation ===");
+        
+        const styleDiv = document.getElementById('style-div');
+        const originalStyles = {
+            color: styleDiv.style.color,
+            fontSize: styleDiv.style.fontSize,
+            backgroundColor: styleDiv.style.backgroundColor
+        };
+
+        document.getElementById('change-style-btn').addEventListener('click', function() {
+            styleDiv.style.color = 'blue';
+            styleDiv.style.fontSize = '24px';
+            styleDiv.style.backgroundColor = '#e0e0e0';
+            styleDiv.style.padding = '10px';
+            console.log('Styles changed');
+        });
+
+        document.getElementById('reset-style-btn').addEventListener('click', function() {
+            styleDiv.style.color = originalStyles.color;
+            styleDiv.style.fontSize = originalStyles.fontSize;
+            styleDiv.style.backgroundColor = originalStyles.backgroundColor;
+            styleDiv.style.padding = '0px';
+            console.log('Styles reset');
+        });
+
+        // ===== SECTION 4: Content Manipulation =====
+        console.log("=== Content Manipulation ===");
+        
+        const contentDiv = document.getElementById('content-div');
+        const htmlDiv = document.getElementById('html-div');
+
+        document.getElementById('change-text-btn').addEventListener('click', function() {
+            // textContent sets only text, ignores HTML tags
+            contentDiv.textContent = 'New Text Content (2026)';
+            console.log('Text changed:', contentDiv.textContent);
+        });
+
+        document.getElementById('change-html-btn').addEventListener('click', function() {
+            // innerHTML sets HTML content
+            htmlDiv.innerHTML = 'Updated <em>HTML</em> <strong>Content</strong> with more tags';
+            console.log('HTML changed:', htmlDiv.innerHTML);
+        });
+
+        // ===== SECTION 5: Data Attributes =====
+        console.log("=== Data Attributes ===");
+        
+        const dataDiv = document.getElementById('data-div');
+        const dataDisplay = document.getElementById('data-display');
+
+        document.getElementById('show-data-btn').addEventListener('click', function() {
+            // Access data attributes using dataset
+            const user = dataDiv.dataset.user;
+            const age = dataDiv.dataset.age;
+            const role = dataDiv.dataset.role;
+            
+            dataDisplay.textContent = `User: ${user}, Age: ${age}, Role: ${role}`;
+            console.log('Data attributes:', { user, age, role });
+        });
+
+        document.getElementById('update-data-btn').addEventListener('click', function() {
+            // Update data attributes
+            dataDiv.dataset.user = 'jane';
+            dataDiv.dataset.age = '28';
+            dataDiv.dataset.role = 'superadmin';
+            
+            dataDisplay.textContent = `Updated - User: ${dataDiv.dataset.user}, Age: ${dataDiv.dataset.age}, Role: ${dataDiv.dataset.role}`;
+            console.log('Data updated:', dataDiv.dataset);
+        });
+
+        // ===== SECTION 6: Element Creation =====
+        console.log("=== Element Creation ===");
+        
+        let itemCount = 1;
+        const itemList = document.getElementById('item-list');
+
+        document.getElementById('add-item-btn').addEventListener('click', function() {
+            itemCount++;
+            const newItem = document.createElement('li');
+            newItem.textContent = `Item ${itemCount}`;
+            itemList.appendChild(newItem);
+            console.log(`Item ${itemCount} added`);
+        });
+
+        document.getElementById('add-paragraph-btn').addEventListener('click', function() {
+            const newPara = document.createElement('p');
+            newPara.textContent = `Dynamic paragraph added at ${new Date().toLocaleTimeString()}`;
+            newPara.style.color = '#666';
+            newPara.style.fontStyle = 'italic';
+            document.getElementById('list-container').appendChild(newPara);
+            console.log('Paragraph added');
+        });
+
+        // ===== SECTION 7: Check & Manage Attributes =====
+        console.log("=== Check & Manage Attributes ===");
+        
+        const inputElement = document.getElementById('my-input');
+
+        document.getElementById('check-attr-btn').addEventListener('click', function() {
+            const isDisabled = inputElement.hasAttribute('disabled');
+            alert(`Input is disabled: ${isDisabled}`);
+            console.log('Disabled attribute exists:', isDisabled);
+        });
+
+        document.getElementById('toggle-disabled-btn').addEventListener('click', function() {
+            if (inputElement.hasAttribute('disabled')) {
+                inputElement.removeAttribute('disabled');
+                console.log('Disabled attribute removed');
+            } else {
+                inputElement.setAttribute('disabled', true);
+                console.log('Disabled attribute added');
+            }
+        });
+
+        document.getElementById('remove-attr-btn').addEventListener('click', function() {
+            inputElement.removeAttribute('disabled');
+            console.log('Disabled attribute removed');
+        });
+
+        // ===== SECTION 8: Multiple Attributes =====
+        console.log("=== Multiple Attributes ===");
+        
+        const multiAttr = document.getElementById('multi-attr');
+        const attrList = document.getElementById('attr-list');
+
+        // Display all attributes
+        function displayAttributes() {
+            const attrs = multiAttr.attributes;
+            let attrText = 'Attributes: ';
+            for (let i = 0; i < attrs.length; i++) {
+                attrText += `${attrs[i].name}="${attrs[i].value}" `;
+            }
+            attrList.textContent = attrText;
+            console.log('All attributes:', attrs);
+        }
+
+        displayAttributes();
+
+        document.getElementById('check-title-btn').addEventListener('click', function() {
+            if (multiAttr.hasAttribute('title')) {
+                const titleValue = multiAttr.getAttribute('title');
+                alert(`Title attribute exists: "${titleValue}"`);
+                console.log('Title found:', titleValue);
+            } else {
+                alert('Title attribute does not exist');
+            }
+        });
+
+        console.log("=== All sections initialized ===");
     </script>
 </body>
 </html>
